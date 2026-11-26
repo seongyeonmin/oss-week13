@@ -67,9 +67,55 @@ export async function chat(history) {
   return data.choices[0].message.content.trim();
 }
 
+// JSON analysis has its own rules, separate from the conversational SYSTEM.
+const SYSTEM_JSON = `
+제품 후기를 분석하고 마크다운이나 부가 설명 없이 JSON 객체로만 답하세요.
+키는 정확히 sentiment, score, summary 세 개만 사용하세요.
+sentiment는 "positive", "negative", "neutral" 중 하나인 문자열이어야 해요.
+score는 후기의 만족도를 나타내는 1 이상 5 이하의 정수여야 해요.
+summary는 후기를 요약한 짧은 한국어 한 문장인 문자열이어야 해요.
+`;
+
 // analyze("a review")  ->  an object, not a sentence:
 //   { sentiment: "positive" | "negative" | "neutral", score: 1..5, summary: "one short sentence" }
 export async function analyze(text) {
-  // TODO P6: write this function (see problems/P6_json.md). Delete the throw line below.
-  throw new Error("analyze() is not written yet");
+  const res = await fetch(
+    `${process.env.LLM_BASE_URL}/chat/completions`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.LLM_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: process.env.LLM_MODEL,
+        messages: [
+          { role: "system", content: SYSTEM_JSON },
+          { role: "user", content: text }
+        ],
+        response_format: { type: "json_object" }
+      })
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`LLM: HTTP ${res.status}`);
+  }
+
+  const data = await res.json();
+  const result = JSON.parse(data.choices[0].message.content);
+  if (result === null || typeof result !== "object" || Array.isArray(result)) {
+    throw new Error("LLM: the answer has the wrong shape");
+  }
+
+  const { sentiment, score, summary } = result;
+  if (
+    !["positive", "negative", "neutral"].includes(sentiment) ||
+    !Number.isInteger(score) || score < 1 || score > 5 ||
+    typeof summary !== "string"
+  ) {
+    throw new Error("LLM: the answer has the wrong shape");
+  }
+
+  return { sentiment, score, summary };
 }
