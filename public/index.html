@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ask Once</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <nav>Ask Once · <a href="chat.html">Chat (P5)</a> · <a href="analyze.html">Analyze (P6)</a></nav>
+      <h1>Ask Once</h1>
+      <p class="lead">One question, one answer. The page asks our server, and our server asks the model.</p>
+
+      <form id="ask-form">
+        <input id="question" type="text" maxlength="500" autocomplete="off"
+               placeholder="Type a question" required />
+        <button id="send" type="submit">Ask</button>
+      </form>
+
+      <p id="status"></p>
+      <p id="answer"></p>
+    </main>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

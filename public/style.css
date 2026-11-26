@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  font-family: system-ui, "Malgun Gothic", sans-serif;
+  color: #222;
+  background: #fff;
+}
+
+main {
+  max-width: 640px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.lead {
+  margin: 0 0 24px;
+  color: #666;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+}
+
+#question,
+#text {
+  flex: 1;
+  padding: 10px 12px;
+  font: inherit;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  font: inherit;
+  color: #fff;
+  background: #1a5fb4;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #999;
+  cursor: wait;
+}
+
+#status {
+  min-height: 1.4em;
+  color: #666;
+}
+
+#status.error {
+  color: #c01c28;
+}
+
+#answer {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+/* P5: chat page */
+nav {
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+
+#log {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+#log li {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  line-height: 1.6;
+}
+
+#log .who {
+  flex: 0 0 56px;
+  font-weight: 600;
+  color: #666;
+}
+
+#log .user .who {
+  color: #1a5fb4;
+}
+
+#log .text {
+  white-space: pre-wrap;
+}
+
+button.plain {
+  color: #222;
+  background: #eee;
+}
+
+/* P6: analyze page */
+#result {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 8px 0 0;
+}
+
+#result[hidden] {
+  display: none;
+}
+
+#badge {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #fff;
+  background: #777;
+}
+
+#badge.positive {
+  background: #26a269;
+}
+
+#badge.negative {
+  background: #c01c28;
+}
+
+#stars {
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #e5a50a;
+}
+
+#summary {
+  line-height: 1.6;
+}

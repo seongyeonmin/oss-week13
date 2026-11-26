@@ -1,0 +1,2 @@
+# .env.example 은 Windows 에서도 줄 끝을 LF 로 받는다(source .env 가 깨지지 않게).
+.env.example text eol=lf

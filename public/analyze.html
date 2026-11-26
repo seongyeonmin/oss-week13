@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analyze</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <nav><a href="index.html">Ask Once</a> · <a href="chat.html">Chat (P5)</a> · Analyze (P6)</nav>
+      <h1>Analyze</h1>
+      <p class="lead">Type a review. The model answers with data, and the page draws from the values.</p>
+
+      <form id="analyze-form">
+        <input id="text" type="text" maxlength="500" autocomplete="off"
+               placeholder="Type a review" required />
+        <button id="send" type="submit">Analyze</button>
+      </form>
+
+      <p id="status"></p>
+      <p id="result" hidden>
+        <span id="badge"></span>
+        <span id="stars"></span>
+      </p>
+      <p id="summary"></p>
+    </main>
+    <script type="module" src="analyze.js"></script>
+  </body>
+</html>
